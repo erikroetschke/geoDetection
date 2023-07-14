@@ -4,8 +4,8 @@ import warnings
 
 import torch
 import numpy as np
-from de4l_geodata.geodata.point import Point, get_distance
-from de4l_geodata.geodata.point_t import PointT
+from geoDetection.point import Point, get_distance
+from geoDetection.point_t import PointT
 
 
 
