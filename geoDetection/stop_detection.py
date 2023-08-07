@@ -5,6 +5,8 @@ approach of Primault, V. (2018) Practically Preserving and Evaluating Location P
 
 from geoDetection import point as pt
 from geoDetection import route as rt
+from geoDetection import point_t as ptt
+import pandas as pd
 import numpy as np
 
 
@@ -29,9 +31,13 @@ def calculate_centroid(route):
         point.to_cartesian_()
     x_mean = np.mean([point.x_lon for point in route])
     y_mean = np.mean([point.y_lat for point in route])
-    centroid = pt.Point([x_mean, y_mean], 'cartesian')
+    timestamps = [point.timestamp.timestamp() for point in route]
+    average_timestamp = pd.to_datetime((sum(timestamps) / len(timestamps)), unit='s')
+
+    centroid = ptt.PointT([x_mean, y_mean], average_timestamp, 'cartesian')
     centroid.to_latlon_()
     return centroid
+
 
 
 def intersection(route_a, route_b):
